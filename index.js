@@ -2,12 +2,14 @@ for(let i = 0; i < document.querySelectorAll(".drum").length; i++){
     document.querySelectorAll(".drum")[i].addEventListener("click", function() {
         let button = this.innerHTML;
         makeSound(button);
+        whenPressed(button);
     })
 }
 
 document.addEventListener("keypress", function(event) {
     let button = event.key;
     makeSound(button);
+    whenPressed(button);
 })
 
 function makeSound(button){
@@ -39,4 +41,12 @@ function makeSound(button){
         let audio = new Audio("sounds/kick-bass.mp3");
         audio.play();
     }
+}
+
+function whenPressed(key){
+    let buttonPressed = "." + key;
+    document.querySelector(buttonPressed).classList.add("pressed");
+    setTimeout(function() {
+        document.querySelector(buttonPressed).classList.remove("pressed");
+    }, 100);
 }
